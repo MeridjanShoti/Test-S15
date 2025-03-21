@@ -89,6 +89,7 @@ public class Main {
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
                             }
+
                             Catalogo catalogo = archivio.aggiungiCatalogo(new Libro(isbn, titolo, annoPubblicazione, numPag, autore, genere));
                             System.out.println("Libro con ISBN " + catalogo.getISBN() + "aggiunto con successo!");
                             break;

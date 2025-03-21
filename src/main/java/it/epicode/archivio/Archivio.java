@@ -20,12 +20,17 @@ public class Archivio {
     List<Catalogo> archivio = new ArrayList<>();
 
     public Catalogo aggiungiCatalogo(Catalogo catalogo) {
-        if (archivio.stream().anyMatch(c -> c.getISBN() == catalogo.getISBN())) {
-            throw new IllegalArgumentException("Catalogo con ISBN " + catalogo.getISBN() + " già presente nell'archivio.");
-        } else {
-            archivio.add(catalogo);
+        try {
+            if (archivio.stream().anyMatch(c -> c.getISBN() == catalogo.getISBN())) {
+                throw new IllegalArgumentException("Catalogo con ISBN " + catalogo.getISBN() + " già presente nell'archivio.");
+            } else {
+                archivio.add(catalogo);
+            }
+            return catalogo;
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage());
+            return null;
         }
-        return catalogo;
     }
 
     public Catalogo ricercaCatalogo(int ISBN) throws ISBNException {
