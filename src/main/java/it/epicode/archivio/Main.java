@@ -96,22 +96,25 @@ public class Main {
                             System.out.println("inserisci il titolo della rivista:");
                             titolo = scMain.nextLine();
                             System.out.println("inserisci l'ISBN della rivista");
+                            int isbnRivista = 0;
                             try {
-                                isbn = scMain.nextInt();
+                                isbnRivista = scMain.nextInt();
                                 scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
                             }
                             System.out.println("inserisci l'anno di pubblicazione della rivista:");
+                            int annoPubblicazioneRivista = 0;
                             try {
-                                annoPubblicazione = scMain.nextInt();
+                                annoPubblicazioneRivista = scMain.nextInt();
                                 scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
                             }
                             System.out.println("inserisci il numero di pagine della rivista:");
+                            int numPagRivista = 0;
                             try {
-                                numPag = scMain.nextInt();
+                                numPagRivista = scMain.nextInt();
                                 scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
@@ -148,7 +151,7 @@ public class Main {
                                     continua = true;
                                 }
                             } while (continua);
-                            archivio.aggiungiCatalogo(new Rivista(isbn, titolo, annoPubblicazione, numPag, periodicita));
+                            archivio.aggiungiCatalogo(new Rivista(isbnRivista, titolo, annoPubblicazioneRivista, numPagRivista, periodicita));
                             break;
                     }
 
