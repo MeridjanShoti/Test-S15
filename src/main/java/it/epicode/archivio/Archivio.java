@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -96,12 +97,13 @@ public class Archivio {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-//vedo se è un'istanza di libro o rivista
-        //verifico se nella lista esiste un libro o una rivista con quell'ISBN
-        // se non esiste lancio un'eccezione
-        // se esiste aggiorno
 
-
+    }
+    public void statistiche(){
+        System.out.println("numero di libri: "+archivio.stream().filter(c->c instanceof Libro).count());
+        System.out.println("numero di riviste: "+archivio.stream().filter(c->c instanceof Rivista).count());
+        System.out.println("Elemento con più pagine" + archivio.stream().max(Comparator.comparingInt(Catalogo::getNumeroPagine)).orElse(null)  );
+        System.out.println("media pagine: "+archivio.stream().mapToInt(Catalogo::getNumeroPagine).average().orElse(0.0));
     }
 }
 

@@ -4,13 +4,14 @@ import it.epicode.classi.Catalogo;
 import it.epicode.classi.Libro;
 import it.epicode.classi.Periodicita;
 import it.epicode.classi.Rivista;
-import it.epicode.exceptions.SelectionException;
 import it.epicode.exceptions.WrongSelectionException;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+@Slf4j
 public class Main {
     public static void main(String[] args) {
         Logger logger = org.slf4j.LoggerFactory.getLogger(Main.class);
@@ -29,8 +30,13 @@ public class Main {
             System.out.println("0. Esci");
             System.out.println("----------------------------");
             System.out.println("Scegli un'opzione: ");
-            int option = scMain.nextInt();
-            scMain.nextLine();
+            int option = 0;
+            try {
+                option = scMain.nextInt();
+                scMain.nextLine();
+            } catch (InputMismatchException e) {
+                logger.error("input errato");
+            }
             switch (option) {
                 case 1:
                     System.out.println("Vuoi aggiungere un libro o una rivista?");
@@ -42,12 +48,12 @@ public class Main {
                         option2 = scMain.nextInt();
                         scMain.nextLine();
                         if (option2 < 1 || option2 > 2){
-                            throw new SelectionException("opzione non valida");
+                            throw new WrongSelectionException("opzione non valida");
                         }
                     } catch (InputMismatchException e) {
                         logger.error("input non corretto");
                     }
-                    catch (SelectionException e) {
+                    catch (WrongSelectionException e) {
                         logger.error(e.getMessage());
                     }
 
@@ -56,18 +62,33 @@ public class Main {
                             System.out.println("inserisci il titolo del libro:");
                             String titolo = scMain.nextLine();
                             System.out.println("inserisci l'ISBN del libro:");
-                            int isbn = scMain.nextInt();
-                            scMain.nextLine();
+                            int isbn = 0;
+                            try {
+                                isbn = scMain.nextInt();
+                                scMain.nextLine();
+                            } catch (InputMismatchException e) {
+                                logger.error("input errato");
+                            }
                             System.out.println("inserisci l'anno di pubblicazione del libro:");
-                            int annoPubblicazione = scMain.nextInt();
-                            scMain.nextLine();
+                            int annoPubblicazione = 0;
+                            try {
+                                annoPubblicazione = scMain.nextInt();
+                                scMain.nextLine();
+                            } catch (InputMismatchException e) {
+                                logger.error("input errato");
+                            }
                             System.out.println("inserisci l'autore del libro:");
                             String autore = scMain.nextLine();
                             System.out.println("inserisci il genere del libro:");
                             String genere = scMain.nextLine();
                             System.out.println("inserisci il numero di pagine del libro:");
-                            int numPag = scMain.nextInt();
-                            scMain.nextLine();
+                            int numPag = 0;
+                            try {
+                                numPag = scMain.nextInt();
+                                scMain.nextLine();
+                            } catch (InputMismatchException e) {
+                                logger.error("input errato");
+                            }
                             Catalogo catalogo = archivio.aggiungiCatalogo(new Libro(isbn, titolo, annoPubblicazione, numPag, autore, genere));
                             System.out.println("Libro con ISBN " + catalogo.getISBN() + "aggiunto con successo!");
                             break;
@@ -75,13 +96,26 @@ public class Main {
                             System.out.println("inserisci il titolo della rivista:");
                             titolo = scMain.nextLine();
                             System.out.println("inserisci l'ISBN della rivista");
-                            isbn = scMain.nextInt();
-                            scMain.nextLine();
+                            try {
+                                isbn = scMain.nextInt();
+                                scMain.nextLine();
+                            } catch (InputMismatchException e) {
+                                logger.error("input errato");
+                            }
                             System.out.println("inserisci l'anno di pubblicazione della rivista:");
-                            annoPubblicazione = scMain.nextInt();
+                            try {
+                                annoPubblicazione = scMain.nextInt();
+                                scMain.nextLine();
+                            } catch (InputMismatchException e) {
+                                logger.error("input errato");
+                            }
                             System.out.println("inserisci il numero di pagine della rivista:");
-                            numPag = scMain.nextInt();
-                            scMain.nextLine();
+                            try {
+                                numPag = scMain.nextInt();
+                                scMain.nextLine();
+                            } catch (InputMismatchException e) {
+                                logger.error("input errato");
+                            }
                             boolean continua = true;
                             Periodicita periodicita = null;
                             do {
@@ -89,8 +123,13 @@ public class Main {
                                     continua = false;
                                     System.out.println("seleziona la periodicità");
                                     System.out.println("1. Settimanale \n2. Mensile \n3. Semestrale");
-                                    int intPer = scMain.nextInt();
-                                    scMain.nextLine();
+                                    int intPer = 0;
+                                    try {
+                                        intPer = scMain.nextInt();
+                                        scMain.nextLine();
+                                    } catch (InputMismatchException e) {
+                                        logger.error("input errato");
+                                    }
                                     switch (intPer) {
                                         case 1:
                                             periodicita = Periodicita.SETTIMANALE;
@@ -118,8 +157,13 @@ public class Main {
                 case 2:
                     try {
                         System.out.println("inserisci l'ISBN da cercare:");
-                        int isbn = scMain.nextInt();
-                        scMain.nextLine();
+                        int isbn = 0;
+                        try {
+                            isbn = scMain.nextInt();
+                            scMain.nextLine();
+                        } catch (InputMismatchException e) {
+                            logger.error("input non corretto");
+                        }
                         System.out.println(archivio.ricercaCatalogo(isbn));
                     } catch (Exception e) {
                         logger.error(e.getMessage());
@@ -128,8 +172,13 @@ public class Main {
                 case 3:
                     try {
                         System.out.println("inserisci l'ISBN da rimuovere:");
-                        int isbn = scMain.nextInt();
-                        scMain.nextLine();
+                        int isbn = 0;
+                        try {
+                            isbn = scMain.nextInt();
+                            scMain.nextLine();
+                        } catch (InputMismatchException e) {
+                            logger.error("input errato");
+                        }
                         archivio.rimuoviCatalogo(isbn);
                     } catch (Exception e) {
                         logger.error(e.getMessage());
@@ -138,8 +187,13 @@ public class Main {
                 case 4:
                     try {
                         System.out.println("inserisci l'anno da cercare:");
-                        int anno = scMain.nextInt();
-                        scMain.nextLine();
+                        int anno = 0;
+                        try {
+                            anno = scMain.nextInt();
+                            scMain.nextLine();
+                        } catch (InputMismatchException e) {
+                            logger.error("input errato");
+                        }
                         System.out.println(archivio.ricercaPerAnnoPubblicazione(anno));
                     } catch (Exception e) {
                         logger.error(e.getMessage());
@@ -165,7 +219,7 @@ public class Main {
                     }
                     break;
                 case 7:
-                    System.out.println("statistiche");
+                    archivio.statistiche();
                     break;
                 case 0:
                     System.out.println("Arrivederci!");
