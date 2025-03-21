@@ -6,9 +6,7 @@ import it.epicode.classi.Periodicita;
 import it.epicode.classi.Rivista;
 import it.epicode.exceptions.ISBNException;
 import it.epicode.exceptions.WrongSelectionException;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
@@ -16,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Archivio {
     Logger logger = org.slf4j.LoggerFactory.getLogger(Archivio.class);
     List<Catalogo> archivio = new ArrayList<>();
@@ -71,6 +66,7 @@ public class Archivio {
                         System.out.println("seleziona la nuova periodicità");
                         System.out.println("1. Settimanale \n2. Mensile \n3. Semestrale");
                         int intPer = sc.nextInt();
+                        sc.nextLine();
                         switch (intPer) {
                             case 1:
                                 ((Rivista) catalogo).setPeriodicita(Periodicita.SETTIMANALE);
