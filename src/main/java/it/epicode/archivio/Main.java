@@ -236,5 +236,6 @@ public class Main {
             System.out.println("invia un input qualsiasi per continuare");
             scMain.nextLine();
         }
+        scMain.close();
     }
 }

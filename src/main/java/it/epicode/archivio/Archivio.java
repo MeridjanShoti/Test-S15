@@ -59,6 +59,7 @@ public class Archivio {
     public void aggiornaCatalogo(Catalogo catalogo) {
         try {
             Scanner sc = new Scanner(System.in);
+            sc.nextLine();
             if (catalogo instanceof Libro) {
                 System.out.println("inserisci nuovo autore");
                 ((Libro) catalogo).setAuthor(sc.nextLine());
@@ -99,6 +100,8 @@ public class Archivio {
             System.out.println("inserisci nuovo numero di pagine");
             catalogo.setNumeroPagine(sc.nextInt());
             sc.nextLine();
+            System.out.println("catalogo aggiornato con successo!");
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
