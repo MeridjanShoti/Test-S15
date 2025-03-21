@@ -243,16 +243,18 @@ public class Main {
                     archivio.statistiche();
                     break;
                 case 0:
-                    System.out.println("Arrivederci!");
                     menu = false;
                     break;
                 default:
                     logger.error("selezione non valida");
 
             }
-            System.out.println("invia un input qualsiasi per continuare");
-            scMain.nextLine();
+            if(menu){
+                System.out.println("invia un input qualsiasi per continuare");
+                scMain.nextLine();
+            }
         }
         scMain.close();
+        System.out.println("Arrivederci!");
     }
 }
