@@ -1,5 +1,7 @@
 package it.epicode.classi;
 
+
+
 public abstract class Catalogo {
     private int ISBN;
     private String title;

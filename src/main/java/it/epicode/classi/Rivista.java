@@ -1,6 +1,5 @@
 package it.epicode.classi;
 
-
 public class Rivista extends Catalogo {
     Periodicita periodicita;
 

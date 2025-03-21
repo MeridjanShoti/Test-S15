@@ -1,5 +1,6 @@
 package it.epicode.classi;
 
+
 public class Libro extends Catalogo{
     private String author;
     private String genre;
