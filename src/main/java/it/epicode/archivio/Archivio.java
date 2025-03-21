@@ -104,9 +104,7 @@ public class Archivio {
         catalogo.setNumeroPagine(sc.nextInt());
         sc.nextLine();
 
-        public void statisticaArchivio(List<Catalogo> archivio) {
 
-        }
 
     }
     }
