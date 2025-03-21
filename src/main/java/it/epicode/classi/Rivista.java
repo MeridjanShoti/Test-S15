@@ -1,7 +1,7 @@
 package it.epicode.classi;
 
 public class Rivista extends Catalogo {
-    Periodicita periodicita;
+    private Periodicita periodicita;
 
     public Rivista(int ISBN, String title, int annoPubblicazione, int numeroPagine, Periodicita periodicita) {
         super(ISBN, title, annoPubblicazione, numeroPagine);
