@@ -33,9 +33,10 @@ public class Main {
             int option = 0;
             try {
                 option = scMain.nextInt();
-                scMain.nextLine();
             } catch (InputMismatchException e) {
                 logger.error("input errato");
+            } finally {
+                scMain.nextLine();
             }
             switch (option) {
                 case 1:
@@ -46,7 +47,6 @@ public class Main {
                     int option2 = 0;
                     try {
                         option2 = scMain.nextInt();
-                        scMain.nextLine();
                         if (option2 < 1 || option2 > 2){
                             throw new WrongSelectionException("opzione non valida");
                         }
@@ -55,6 +55,8 @@ public class Main {
                     }
                     catch (WrongSelectionException e) {
                         logger.error(e.getMessage());
+                    } finally {
+                        scMain.nextLine();
                     }
 
                     switch (option2) {
@@ -65,17 +67,19 @@ public class Main {
                             int isbn = 0;
                             try {
                                 isbn = scMain.nextInt();
-                                scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
+                            } finally {
+                                scMain.nextLine();
                             }
                             System.out.println("inserisci l'anno di pubblicazione del libro:");
                             int annoPubblicazione = 0;
                             try {
                                 annoPubblicazione = scMain.nextInt();
-                                scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
+                            } finally {
+                                scMain.nextLine();
                             }
                             System.out.println("inserisci l'autore del libro:");
                             String autore = scMain.nextLine();
@@ -85,13 +89,18 @@ public class Main {
                             int numPag = 0;
                             try {
                                 numPag = scMain.nextInt();
-                                scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
+                            } finally {
+                                scMain.nextLine();
                             }
 
                             Catalogo catalogo = archivio.aggiungiCatalogo(new Libro(isbn, titolo, annoPubblicazione, numPag, autore, genere));
-                            System.out.println("Libro con ISBN " + catalogo.getISBN() + "aggiunto con successo!");
+                            try {
+                                System.out.println("Libro con ISBN " + catalogo.getISBN() + "aggiunto con successo!");
+                            } catch (Exception e) {
+                                logger.error("il libro o la rivista è null");
+                            }
                             break;
                         case 2:
                             System.out.println("inserisci il titolo della rivista:");
@@ -100,25 +109,28 @@ public class Main {
                             int isbnRivista = 0;
                             try {
                                 isbnRivista = scMain.nextInt();
-                                scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
+                            } finally {
+                                scMain.nextLine();
                             }
                             System.out.println("inserisci l'anno di pubblicazione della rivista:");
                             int annoPubblicazioneRivista = 0;
                             try {
                                 annoPubblicazioneRivista = scMain.nextInt();
-                                scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
+                            } finally {
+                                scMain.nextLine();
                             }
                             System.out.println("inserisci il numero di pagine della rivista:");
                             int numPagRivista = 0;
                             try {
                                 numPagRivista = scMain.nextInt();
-                                scMain.nextLine();
                             } catch (InputMismatchException e) {
                                 logger.error("input errato");
+                            } finally {
+                                scMain.nextLine();
                             }
                             boolean continua = true;
                             Periodicita periodicita = null;
@@ -130,9 +142,10 @@ public class Main {
                                     int intPer = 0;
                                     try {
                                         intPer = scMain.nextInt();
-                                        scMain.nextLine();
                                     } catch (InputMismatchException e) {
                                         logger.error("input errato");
+                                    } finally {
+                                        scMain.nextLine();
                                     }
                                     switch (intPer) {
                                         case 1:
@@ -164,9 +177,10 @@ public class Main {
                         int isbn = 0;
                         try {
                             isbn = scMain.nextInt();
-                            scMain.nextLine();
                         } catch (InputMismatchException e) {
                             logger.error("input non corretto");
+                        } finally {
+                            scMain.nextLine();
                         }
                         System.out.println(archivio.ricercaCatalogo(isbn));
                     } catch (Exception e) {
@@ -179,9 +193,10 @@ public class Main {
                         int isbn = 0;
                         try {
                             isbn = scMain.nextInt();
-                            scMain.nextLine();
                         } catch (InputMismatchException e) {
                             logger.error("input errato");
+                        } finally {
+                            scMain.nextLine();
                         }
                         archivio.rimuoviCatalogo(isbn);
                     } catch (Exception e) {
@@ -194,9 +209,10 @@ public class Main {
                         int anno = 0;
                         try {
                             anno = scMain.nextInt();
-                            scMain.nextLine();
                         } catch (InputMismatchException e) {
                             logger.error("input errato");
+                        } finally {
+                            scMain.nextLine();
                         }
                         System.out.println(archivio.ricercaPerAnnoPubblicazione(anno));
                     } catch (Exception e) {
@@ -216,10 +232,11 @@ public class Main {
                     try {
                         System.out.println("inserisci l'ISBN del libro da aggiornare:");
                         Catalogo catalogoDaAggiornare = archivio.ricercaCatalogo(scMain.nextInt());
-                        scMain.nextLine();
                         archivio.aggiornaCatalogo(catalogoDaAggiornare);
                     } catch (Exception e) {
                         logger.error(e.getMessage());
+                    } finally {
+                        scMain.nextLine();
                     }
                     break;
                 case 7:
